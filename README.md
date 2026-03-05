@@ -5,32 +5,6 @@
 This microservice is the foundational Product Management Module for a scalable e-commerce ecosystem. It is engineered to meet standards of software excellence, prioritizing architectural decoupling, type safety, and standardized API responses.
 本項目是可擴展電商生態系統中的核心產品管理模組。開發過程嚴格遵循軟體工程標準，優先考慮架構解耦、類型安全（Type Safety）以及標準化的 API 響應規範。
 
-Update:
-System Architecture
-This project adopts a distributed microservices architecture:
-Service Registry (Eureka): The system's central hub, responsible for service discovery.
-Product Service: An independent process, handling product logic.
-Order Service: An independent process, handling order logic.
-Concurrency & Distribution: Each service internally handles concurrent requests through multithreading; services horizontally scale through REST communication.
-
-  [ User Request ]
-              |
-      [ Service Registry ] <---- (Heartbeat) ---- [ Product Service ]
-         (Eureka: 8761)                          (Port: 8081)
-              ^                                       |
-              |                                 [ MySQL DB ]
-      [ Order Service ] <-----------------------------/
-         (Port: 8082)
-
-System Components
-
-1. Service Registry (Eureka)**: Responsible for service governance and monitoring.
-
-2. Product Service**: Product management module, connects to the MySQL database for CRUD operations.
-
-3. Order Service (In Progress)**: Order processing module, demonstrating load balancing and Remote Procedure Call (RPC).
-
-
 
 🛠️ Tech Stack | 技術棧
  * Framework: Spring Boot 2.7.3 (Enterprise stability).
@@ -76,4 +50,27 @@ The next phase involves implementing Service Discovery via Netflix Eureka to ena
 下一階段將透過 Netflix Eureka 實作服務發現機制，實現集群中 ProductService 與 OrderService 的動態註冊。
 > Note: Postman test results and database screenshots (verifying 200 OK and data persistence) are available in the project documentation folder.
 > 註: Postman 測試結果與數據庫截圖（驗證 200 OK 與數據持久化）已上傳至項目文檔文件夾中。
+
+✨✨Update:
+System Architecture
+This project adopts a distributed microservices architecture:
+Service Registry (Eureka): The system's central hub, responsible for service discovery.
+Product Service: An independent process, handling product logic.
+Order Service: An independent process, handling order logic.
+Concurrency & Distribution: Each service internally handles concurrent requests through multithreading; services horizontally scale through REST communication.
+
+Architecture Diagram
+  [ User Request ]
+              |
+      [ Service Registry ] <---- (Heartbeat) ---- [ Product Service ]
+         (Eureka: 8761)                          (Port: 8081)
+              ^                                       |
+              |                                 [ MySQL DB ]
+      [ Order Service ] <-----------------------------/
+         (Port: 8082)
+
+System Components
+1. Service Registry (Eureka)**: Responsible for service governance and monitoring.
+2. Product Service**: Product management module, connects to the MySQL database for CRUD operations.
+3. Order Service (In Progress)**: Order processing module, demonstrating load balancing and Remote Procedure Call (RPC).
 
